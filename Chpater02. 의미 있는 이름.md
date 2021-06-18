@@ -77,4 +77,25 @@ public List<Cell> getFlaggedCells(){
 
 
 
+## 3. 의미 있게 구분하라.
+
+> 이름이 달라야 한다면 의미도 달라져야 한다.
+> 읽는 사람이 차이를 알도록 이름을 지어라.
+
+연속적인 숫자를 덧붙인 이름은 아무런 정보를 제공하지 못하는 이름이다.
+
+```java
+public static void copyChars(char a1[], char a2[]){ 
+    // a1 -> source, a2-> destination
+  for (int i =0; i < a1.length; i++){
+    a2[i] = a1[i];
+  }
+}
+```
+불용어를 추가한 이름 역시 아무런 정보도 제공하지 못한다.
+
+- Product : ProductInfo, ProductData
+
+- Name : NameString
+
 
