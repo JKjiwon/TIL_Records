@@ -57,3 +57,24 @@ public List<Cell> getFlaggedCells(){
     return flaggedCells;
 }
 ```
+
+## 2. 그릇된 정보를 피하라.
+
+> 프로그래머는 코드에 그릇된 단서를 남겨서는 안된다.
+
+나름대로 널리 쓰이는 의미가 있는 단아를 다른 의미로 사용하지 마라.
+
+- 예를들어 빗변(hypotenuse)를 hp라는 변수로 사용할 때, 훌륭한 약어처럼 보이지만 hp는 유닉스 플렛폼의 한 종류로 널리 사용되는 단어이므로 hp라는 변수는 독자에게 그릇된 정보를 제공한다.
+
+여러계정을 그룹으로 묶을 때, 실제 List가 아니라면, acccountList라 명명하지 마라.
+- 대신 accountGroup, bunchOfAccounts, Accounts를 사용하라.
+
+일관성이 떨어지는 모듈 간에 서로 흡사한 이름을 사용하지 마라.
+
+- XYZControllerForEfficientHandlingOfStrings 와  XYZControllerForEfficientStorageOfStrings
+
+소문자 l 은 숫자 1 처럼 보이고 대문자 O 는 숫자 0 처럼 보이므로 사용하지 마라.
+
+
+
+
