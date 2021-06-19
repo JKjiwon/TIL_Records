@@ -325,11 +325,87 @@ void DeleteItems() {}
 
 ## 의미 있는 맥락을 추가하라.
 
+- 대다수의 이름은 스스로 의미가 분명하지 않다.
+
+- firstName, lastName, street, houseNumber, city, state, zipcode 중 하나의 단어만으로는 의미가 분명하지 않다.
+
+- 전체 맥락에서 주소라는 `의미`를 가질 수 있다.
+
+- Address라는 클래스를 생성하여 변수들을 관리하면 더 좋다.
 
 
+```java
+// Bad
+// 함수가 너무 길며, 메서드만 훑어서는 세 변수의 의미가 불분명하다.
+private void printGuessStatistics(char candidate, int count){
+    String number;
+    String verb;
+    String pluralModifier;
 
+    if(count == 0) {
+        number = "no";
+        verb = "are";
+        pluralModifier = "s";
+    } else if (count == 1) {
+        number = "1";
+        verb = "is";
+        pluralModifier = "";
+    } else {
+        number = Integer.toString(count);
+        verb = "are";
+        pluralModifier = "s";
+    }
+    
+    String guessMessage = String.format(
+        "There %s %s %s", verb, number, candidate, pluralModifier);
+    )
+    print(guessMessage);
+}
 
+// Good
+// 함수를 작은 조각으로 쪼개고자 GuessStatisticsMessage 라는 클래스를 만들었다.
+// GuessStatisticsMessage 안에 세 변수를 넣으니 세 변수의 맥락이 분명해졌다.
+public class GuessStatisticsMessage {
+    private String number;
+    private String verb;
+    private String pluralModifier;
 
+    public String make(char candidate, int count) {
+        createPluralDependentMessageParts(count);
+        return String.format(
+            "There %s %s %s",
+            verb, number, candidate, pluralModifier);
+    }
+    
+    private void createPluralDependentMessageParts(int count){
+        if(count == 0) {
+            thereAreNoLetters();
+        } else if (count == 1){
+            thereIsOneLetter();
+        } else {
+            thereAreManyLetters(count);
+        }
+    }
+    
+    private void thereAreNoLetters() {
+        number = "no";
+        verb = "are";
+        pluralModifier = "s";
+    }
+
+    private void thereIsOneLetter() {
+        number = "1";
+        verb = "is";
+        pluralModifier = "";
+    }
+
+    private void thereAreManyLetters() {
+        number = Integer.toString(count);
+        verb = "are";
+        pluralModifier = "s";
+    }
+}
+```
 
 
 
