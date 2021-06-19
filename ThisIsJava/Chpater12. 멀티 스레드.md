@@ -88,10 +88,10 @@ Thread thread = new Thread() {
 
 ```java
 // 스레드 객체의 참조를 가지고 있을 때.
-thread.setName("스레드 이름");
-thread.getname();
+thread1.setName("스레드 이름");
+thread1.getname();
 // 가지고 있지 않다면
-Thread.currentThread(); // 스레드 객체의 참조를 얻을 수 있다.
+Thread thread2 = Thread.currentThread(); // 스레드 객체의 참조를 얻을 수 있다.
 ```
 
 ### 스레드 우선순위
