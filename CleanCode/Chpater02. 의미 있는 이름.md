@@ -407,12 +407,24 @@ public class GuessStatisticsMessage {
 }
 ```
 
+<br>
 
+## 불필요한 맥락을 없애라.
 
+고급 휘발유 충전소(Gas Station Deluxe)라는 어플리케이션을 짠다고 가정하자.
 
+- 모든 클래스 이름을 GSD로 시작한다는 생각은 바람직하지 않다.
 
+의미가 분명하다면 실세계의 이름을 그대로 사용해도 좋다.
 
+- accountAddress, custommerAddress는 Address가 적합하다.
 
+- 포트 주소, MAC 주소, 웹 주소는 PostalAddress, MAC, URI 이 적합하다.
 
+<br>
 
+## 마치면서
 
+- 좋은 이름을 선택하려면 설명 능력이 뛰어나야 하고, 문화적 배경이 같아야한다. 이것이 제일 어렵다.
+
+- 우리는 쉽게 읽히는 코드를 짜는데 집중해야한다.
