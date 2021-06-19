@@ -17,7 +17,7 @@ int d; // 경과시간(단위: 날짜)
 
 // Good
 int elapsedTimeInDays;
-int daysSinceCreatino;
+int daysSinceCreation;
 int daysSinceModification;
 int fileAgeInDays;
 ```
@@ -64,11 +64,12 @@ public List<Cell> getFlaggedCells(){
 
 > 프로그래머는 코드에 그릇된 단서를 남겨서는 안된다.
 
-나름대로 널리 쓰이는 의미가 있는 단아를 다른 의미로 사용하지 마라.
+나름대로 널리 쓰이는 의미가 있는 단어를 다른 의미로 사용하지 마라.
 
-- 예를들어 빗변(hypotenuse)를 hp라는 변수로 사용할 때, 훌륭한 약어처럼 보이지만 hp는 유닉스 플렛폼의 한 종류로 널리 사용되는 단어이므로 hp라는 변수는 독자에게 그릇된 정보를 제공한다.
+- 예를 들어 빗변(hypotenuse)을 hp라는 변수로 사용할 때, 훌륭한 약어처럼 보이지만 hp는 유닉스 플렛폼의 한 종류로 널리 사용되는 단어이므로 hp라는 변수는 독자에게 그릇된 정보를 제공한다.
 
-여러계정을 그룹으로 묶을 때, 실제 List가 아니라면, acccountList라 명명하지 마라.
+여러 계정을 그룹으로 묶을 때, 실제 List가 아니라면, acccountList라 명명하지 마라.
+
 - 대신 accountGroup, bunchOfAccounts, Accounts를 사용하라.
 
 일관성이 떨어지는 모듈 간에 서로 흡사한 이름을 사용하지 마라.
@@ -132,7 +133,7 @@ class Customer{
 ## 검색하기 쉬운 이름을 사용하라.
 
 이름 길이는 범위 크기에 비례해야 한다.  
-변수나 상수를 코드 여러곳에서 사용한다면 검색하기 쉬운 이름이 바람직하다.
+변수나 상수를 코드 여러곳에서 사용한다면 길어도 검색하기 쉬운 이름이 바람직하다.
 
 ```java
 // Bad
@@ -157,7 +158,7 @@ for(int j = 0; j < NUMBER_OF_TASKS; j++){
 
 ## 인코딩을 피하라.
 
-> 유형이나 범위 정보까지 인코딩에 넣으면 그만큼 이름을 해독하기 어려워 진다.
+> 유형이나 범위 정보까지 인코딩에 넣으면 그만큼 이름을 해독하기 어려워진다.
 
 **헝가리식 표기법**
 
@@ -169,7 +170,7 @@ PhoneNumber phoneString; // 타입이 바뀌어도 이름은 바뀌지 않는다
 
 - 자바는 언어에서 타입 오류가 항상 탐지될 수 있는  강한 타입(strongly-typed)의 언어이다.
 
-- IDE는 코드를 컴파일 하지 않고도 타입오류를 감지할 정도로 발전했다.
+- IDE는 코드를 컴파일 하지 않고도 타입 오류를 감지할 정도로 발전했다.
 
 **멤버 변수 접두어**
 
@@ -179,7 +180,7 @@ PhoneNumber phoneString; // 타입이 바뀌어도 이름은 바뀌지 않는다
 
 - 멤버 변수를 다른 색상으로 표시하거나 눈에 띄게 보여주는 IDE를 사용해야 마땅하다.
 
-- 접두어는 옛날에 작서한 구닥다리 코드라는 징표가 된다.
+- 접두어는 옛날에 작성한 구닥다리 코드라는 징표가 된다.
 
 ```java
 // Bad
@@ -201,7 +202,7 @@ public class Part {
 
 **인터페이스 클래스와 구현 클래**
 
-- 인터페이스 클래스 이름과 구현클래스를 인코딩 해야한다면 구현 클래스의 이름을 택하라.
+- 인터페이스 클래스 이름과 구현 클래스를 인코딩 해야한다면 구현 클래스의 이름을 택하라.
 
 ```java
 public interface ShapeFactory {}
@@ -294,7 +295,8 @@ void DeleteItems() {}
 
 ## 말장난을 하지마라.
 
-> 대충 훑어봐도 이해하기 쉽게 짜야한다. 즉 의도를 밝힐 책음이 저자에에게 있다.
+> 대충 훑어봐도 이해하기 쉽게 짜야한다. 즉 의도를 밝힐 책임이 저자에에게 있다.
+
 다른 개념에 같은 단어를 사용하지 마라.
 
 - 기존의 add : 두 값을 더해 새로운 값을 만들어내는 함수
@@ -417,9 +419,9 @@ public class GuessStatisticsMessage {
 
 의미가 분명하다면 실세계의 이름을 그대로 사용해도 좋다.
 
-- accountAddress, custommerAddress는 Address가 적합하다.
+- accountAddress, custommerAddress 보다는 Address가 적합하다.
 
-- 포트 주소, MAC 주소, 웹 주소는 PostalAddress, MAC, URI 이 적합하다.
+- 포트 주소, MAC 주소, 웹 주소는 PostalAddress, MAC, URI 가 적합하다.
 
 <br>
 
