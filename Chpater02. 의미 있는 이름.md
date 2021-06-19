@@ -221,3 +221,64 @@ public class ShapeFactoryImpl implements ShapeFactory {}
 
 - 전문가 프로그래머는 `남들이 이해하는 코드`를 내놓는다.
 
+<br>
+
+## 8. 클래스와 메서드 이름
+
+**클래스 이름과 객체 이름**
+
+- 명사나 명사구가 적합하다.
+
+-  Customer, WikiPage, Account, AddressParser 등이 좋은 예
+
+- Manager, Processor, Data, Info 등과 같은 단어는 피한다.
+
+- 동사는 사용하지 않는다.
+
+
+**메서드 이름**
+
+- 동사나 동사구가 적합하다.
+
+- pstPayments, deletePage, save 등이 좋은 예
+
+- 접근자(Accessor), 변경자(Mutator), 조건자(Predicate)는 javabean 표준에 따라 값 앞에 get, set, is를 붙인다.
+
+```java
+String name = employee.getName;
+customer.setName("mike");
+if (paycheck.isPosted()) ...
+```
+
+- 생성자를 중복 정의할 때는 정적 팩토리 메서드를 사용한다.
+
+```java
+// Bad 
+Complex fulcrumPoint = new Complex(23.0);
+
+// Good
+Complex fulcrumPoint = Complex.FromRealNumber(23.0);
+```
+
+<br>
+
+## 9. 기발한 이름은 피하라.
+
+> 의도를 분명하고 솔직하게 표현하라.
+
+- 재미난 이름보다는 `명료한` 이름을 택하라.
+
+```java
+// Bad
+void HolyHandGrenade(){} // <몬티 파이썬>에 나오는 수류탄 이름
+
+// Good
+void DeleteItems() {}
+```
+
+<br>
+
+## 10. 한 개념에 한 단어를 사용하라.
+
+
+
