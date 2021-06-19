@@ -100,7 +100,7 @@ Thread.currentThread(); // 스레드 참조를 얻을 수 있다.
 
 - **병렬성(Parallelism)** : 멀티 코어에서 개별 스레드를 동시에 실행하는 성질
 
-    ![동시성vs병렬성](images/thread01.png)
+    ![동시성vs병렬성](/ThisIsJava/images/thread01.png)
 
 #### 스레드 스케쥴링
 
