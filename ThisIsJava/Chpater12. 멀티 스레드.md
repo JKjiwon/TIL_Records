@@ -21,7 +21,7 @@
 
 - 필요에 따라 작업 스레드를 만들어서 병렬로 코드를 실행 가능
 
-- 모든 스레드가 종료되어야 프로세스가 종료된다.
+- 프로세스는 모든 스레드가 종료되어야 종료된다.
 
 
 ### 작업 스레드 생성과 실행
@@ -63,7 +63,7 @@ thread.start();
 
 #### Thread 하위 클래스로부터 생성
 
-- Thread 클래스를 상속한 후 run 메소드를 overriding 해서 스레드가 실행 코드를 작성
+- Thread 클래스를 상속한 후 run 메소드를 overriding 해서 스레드가 실행할 코드를 작성
 
 ```java
 public class WorkerThread extends Thread {
@@ -91,14 +91,14 @@ Thread thread = new Thread() {
 thread.setName("스레드 이름");
 thread.getname();
 // 가지고 있지 않다면
-Thread.currentThread(); // 스레드 참조를 얻을 수 있다.
+Thread.currentThread(); // 스레드 객체의 참조를 얻을 수 있다.
 ```
 
 ### 스레드 우선순위
 
-- **동시성(Concurrency)** : 하나의 코어에서 멀티 스레드가 번갈아가며 실행하는 성질
+- **동시성(Concurrency)** : `하나의 코어`에서 멀티 스레드가 번갈아가며 실행하는 성질
 
-- **병렬성(Parallelism)** : 멀티 코어에서 개별 스레드를 동시에 실행하는 성질
+- **병렬성(Parallelism)** : `멀티 코어`에서 개별 스레드를 동시에 실행하는 성질
 
     ![동시성vs병렬성](/ThisIsJava/images/thread01.png)
 
@@ -127,7 +127,7 @@ thread.setPriority(Thread.MIN_PRIORITY); // 1
 
 - 시간 할당량(Time Slice)을 정해서 하나의 스레드를 정해진 시간만큼 실행하고 다시 다른 스레드를 실행하는 방식
 
-- 자바 가상 기계(JVM)에 의해서 정해지기 때문에, 개발자가 제어 불능
+- 자바 가상 머신(JVM)에 의해서 정해지기 때문에, 개발자가 제어 불능
 
 
 
