@@ -205,5 +205,19 @@ public class Part {
 
 ```java
 public interface ShapeFactory {}
-public ShapeFactoryImpl implements ShapeFactory {}
+
+public class ShapeFactoryImpl implements ShapeFactory {}
 ```
+
+<br>
+
+## 7. 자신의 기억력을 자랑하지 마라.
+
+> 독자가 코드를 읽으면서 변수 이름을 실제 개념으로 변환해야 한다면 그 변수 이름은 바람직하지 못하다.
+
+- 예를 들어 url을 변수 r로 설정
+
+- 전문가 프로그래머는 `명료함이 최고`라는 사실을 이해한다.
+
+- 전문가 프로그래머는 `남들이 이해하는 코드`를 내놓는다.
+
