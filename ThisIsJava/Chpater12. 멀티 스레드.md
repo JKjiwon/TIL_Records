@@ -248,3 +248,38 @@ public void method() {
         </tr>
     </tbody>
 </table>
+
+<br>
+
+## 스레드 상태 제어
+
+![스레드 생명주기](images/thread_life_cycle.png)
+
+### sleep() : 주어진 시간동안 일시 정지
+
+- Thread.sleep();
+
+- 주어진 시간동안 일시 정지 상태가 되고 다시 실행 대기 상태가 된다.
+
+### yield() : 다른 스레드에게 실행 양보
+
+-  Thread.yield();
+
+- yield() 메소드를 호출한 스레드는 실행 대기 상태로 돌아가고 
+
+- 동일한 우선순위 또는 높은 우선순위를 갖는 다른 스레드가 실행 기회를 가질 수 있게 해준다.
+
+
+### join() : 다른 스레드의 종료를 기다림
+
+- 예를 들어 계산 작업을 하는 스레드가 모든 계산 작업을 마쳤을 때, 계산 결과를 받아 이용하는 경우가 이에 해당한다.
+
+```java
+// ThreadA
+threadB.start();
+threadB.join(); // threadB가 종료 될때까지 일시 정지하며 기다린다.
+
+// ThreadB
+run(){
+}
+```
