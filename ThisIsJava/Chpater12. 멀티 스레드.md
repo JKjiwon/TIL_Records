@@ -400,7 +400,7 @@ public class WaitNotifyExample {
 
 - 스레드는 자신의 run() 메소드가 모두 실행되면 자동적으로 종료된다.
     
-    - 스레드가 사용한 자원을 안전하게 정리
+    - 스레드가 사용한 자원을 `안전하게` 정리
 
 - 경우에 따라서 실행 중인 스레드를 즉시 종료할 필요가 있다.
 
@@ -442,7 +442,72 @@ public class XXXThread extends Thread {
     boolean status = objThread.isInterrupted();
     ```
 
+### 데몬 스레드
 
+- 주 스레드의 작업을 돕는 보조적인 역할을 수행하는 스레드
+
+- 주 스레드가 종료되면 데몬 스레드는 강제적으로 자동 종료
+
+- 예: 워드프로세서의 자동 저장, 미디어 플레이어의 동영상 및 음악 재생, JVM의 가비지 컬렉터
+
+```java 
+public static void main(String[] args){
+    AutoSaveThread thread = new AutoSaveThread();
+    thread.setDemon(ture); // 메인 스레드의 데몬 스레드로 설정
+    thread.start();
+}
+```
+
+### 스레드 그룹
+
+- 관련된 스레드를 묶어서 관리
+
+- 스레드는 반드시 하나의 스레드 그룹에 포함
+
+- 명시적으로 스레드 그룹에 포함시키지 않으면 기본적으로 자신을 생성한 스레드와 같은 스레드 그룹에 속하게 된다.
+
+### 스레드 그룹이름 얻기
+
+- 현재 스레드가 속한 스레드 그룹 이름 얻기
+ 
+    ```java
+    ThreadGroup group = Thread.currentThread().getThreadGroup();
+    String groupName = group.getName()
+    ```
+
+- 프로세스 내에서 실행되는 모든 스레드에 대한 정보 얻기
+
+    ```java
+    Map<Thread, StackTraceElement[]> allStackTraces = Thread.getAllStackTraces();
+    ```
+
+
+### 스레드 그룹 생성
+
+```java
+new ThreadGroup(String name);
+new ThreadGroup(ThreadGroup parent, String name);
+```
+
+### 스레드 그룹의 일괄 interrupt()
+
+- 스레드 그룹에서 제공하는 interrupt() 메소드를 이용하면 그룹 내에 포함된 모든 스레드를 일괄 interrupt할 수 있다.
+
+- 스레드 그룹의 interrupt() 메소드는 포함된 모든 스레드의 interrupt() 메소드를 내부적으로 호출
+
+- 소속된 스레드의 interrupt() 메소드만 호출할 뿐 개별 스레드에서 발생하는 InterruptedException에 대한 예외 처리는 개별 스레드가 직접 해야한다.
+
+## 스레드 풀(Thread Pool)
+
+- 병렬 작업 처리가 많아지면 스레드 개수가 증가되고 그에 따른 스레드 생성과 스케쥴링으로 인해 CPU가 바빠져 메모리 사용량이 늘어난다. (애플리케이션의 성능 저하)
+
+- 갑작스런 병렬 작업의 폭증으로 인한 스레드의 폭증을 막으려면 스레드 풀을 사용해야한다.
+
+- 작업 처리에 사용되는 스레드를 제한된 개수많큼 정해 놓고 작업 큐에 들어오는 작업들을 하나씩 스레드가 맡아서 처리한다.
+
+- 작업 처리가 끝난 스레드는 다시 작업 큐에서 새로운 작업을 가져와 처리한다.
+
+    ![스레드 풀](images/thread_pool.png)
 
 
 
