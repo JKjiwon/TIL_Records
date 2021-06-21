@@ -309,7 +309,7 @@ class DataBox{
     private String data;
 
     public synchronized String getData() {
-        // data 필드가 null이면 소비자 스레드를 일시 정지 상태로 만듬.
+        // data 필드가 null이면 소비자 스레드를 일시 정지 상태로 만듬, 두번 읽는 것을 방지.
         if (this.data == null) { 
             try {
                 wait();
@@ -326,7 +326,7 @@ class DataBox{
     }
 
     public synchronized void setData(String data) {
-        // data 필드가 null이 아니면 생산자 스레드를 일시 정지 상태로 만듬.
+        // data 필드가 null이 아니면 생산자 스레드를 일시 정지 상태로 만듬, 두번 쓰는 것을 방지.
         if (this.data != null) {
             try {
                 wait();
@@ -395,3 +395,54 @@ public class WaitNotifyExample {
     }
 }
 ```
+
+### stop 플래그, interrupt() 스레드의 안전한 종료
+
+- 스레드는 자신의 run() 메소드가 모두 실행되면 자동적으로 종료된다.
+    
+    - 스레드가 사용한 자원을 안전하게 정리
+
+- 경우에 따라서 실행 중인 스레드를 즉시 종료할 필요가 있다.
+
+- stop() : deprecated -> 파일, 네트워크 등 자원이 불안전한 상태로 남겨짐.
+
+
+#### stop 플래그를 이용하자.
+
+```java
+public class XXXThread extends Thread {
+    private boolean stop; // stop 플래그 필드
+
+    // 다른 스레드에서 stop값 변경
+    public void setStop(boolean stop) {
+        this.stop = stop;
+    }
+
+    @Override
+    public void run() {
+        while(!stop){
+            // 스레드가 반복 실행하는 코드
+        }
+        // 스레드가 사용한 자원 정리
+    }
+}
+```
+
+#### interrupt() 메소드를 이용하는 방법
+
+- interrupt() : 스레드가 `일시 정지 상태`에 있을 때 InterruptedException 예외를 발생
+
+- run() 메소드를 정상 종료
+
+- `스레드가 실행 대기 또는 실행 상태에 있을 때` interrupt() 메소드가 실행되면 즉시 InterruptedException 예외가 발생하지 않고, `스레드가 미래에 일시 정지 상태가 되면` InterruptedException 예외가 발생한다.
+
+- interrupt() 의 호출 여부 확인
+    ```java
+    boolean status = Thread.interrupted();
+    boolean status = objThread.isInterrupted();
+    ```
+
+
+
+
+
