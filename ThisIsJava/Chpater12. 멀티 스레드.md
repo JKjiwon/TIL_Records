@@ -283,3 +283,115 @@ threadB.join(); // threadB가 종료 될때까지 일시 정지하며 기다린�
 run(){
 }
 ```
+
+### wait(), notify(), notifyAll() : 스레드간 협업
+
+- 두개의 스레드를 `교대로 번갈아가며` 실행해야 하는 경우
+
+- 자신의 작업이 끝나면 상대방 스레드를 일시 정지 상태에서 풀어주고, 자신은 일시정지 상태로 만든다.
+
+- 핵심은 `공유 객체` : 두 스레드가 작업할 내용을 각각 동기화 메소드로 구분
+
+- notify() : 작업이 완료됨을 알림, 일시 정지상태에 있는 다른 스레드를 실행 대기 상태로 만듬.
+
+- wait() : 자신을 일시 정지 상태로 만듬.
+
+#### 예제
+
+데이터를 저장하는 스레드(생산자)가 데이터를 저장하면, 데이터를 소비하는 스레드(소비자)가 데이터를 읽고 처리하는 교대 작업
+
+- 공유 객체(DataBox)에 data 필드 값이 null이면 생산자 스레드를 실행 대기 상태, 소비자 스레드를 일시 정지 상태로 만든다.
+
+- 공유 객체(DataBox)에 data 필드 값이 null이 아니면 소비자 스레드를 실행 대기 상태, 생상자 스레드를 일시 정지 상태로 만든다.
+
+```java 
+class DataBox{
+    private String data;
+
+    public synchronized String getData() {
+        // data 필드가 null이면 소비자 스레드를 일시 정지 상태로 만듬.
+        if (this.data == null) { 
+            try {
+                wait();
+            }catch (InterruptedException e){}
+        }
+        // 소비자 스레드가 데이터를 읽음.
+        String returnValue = data;
+        System.out.println("ConsumerThread 가 읽은 데이터: " + returnValue);
+
+        // data 필드를 null로 만들고 생산자 스레드를 실행 대기 상태로 만듬.
+        data = null;
+        notify();
+        return returnValue;
+    }
+
+    public synchronized void setData(String data) {
+        // data 필드가 null이 아니면 생산자 스레드를 일시 정지 상태로 만듬.
+        if (this.data != null) {
+            try {
+                wait();
+            }catch (InterruptedException e){}
+        }
+
+        // data 필드에 값을 저장하고 소비자 스레드를 실행 대기 상태로 만듬.
+        this.data = data;
+        System.out.println("ProducerThread가 생성한 데이터: " + data);
+        notify();
+    }
+}
+```
+
+데이터를 생산(저장)하는 스레드
+
+```java
+class ProducerThread extends Thread {
+    private DataBox dataBox;
+
+    public ProducerThread(DataBox dataBox) {
+        this.dataBox = dataBox;
+    }
+
+    @Override
+    public void run() {
+        for (int i = 1; i <= 3; i++) {
+            String data = "Data-" + i;
+            dataBox.setData(data);
+        }
+    }
+}
+```
+
+데이터를 소비하는(읽는) 스레드
+
+```java
+class ConsumerThread extends Thread {
+    private DataBox dataBox;
+
+    public ConsumerThread(DataBox dataBox) {
+        this.dataBox = dataBox;
+    }
+
+    @Override
+    public void run() {
+        for (int i = 1; i <= 3; i++) {
+            String data = dataBox.getData();
+        }
+    }
+}
+```
+
+두 스레드를 생성하고 실행하는 메인 스레드
+
+```java
+public class WaitNotifyExample {
+    public static void main(String[] args) {
+        DataBox dataBox = new DataBox();
+
+        ProducerThread producerThread = new ProducerThread(dataBox);
+        ConsumerThread consumerThread = new ConsumerThread(dataBox);
+
+        consumerThread.start();
+        producerThread.start();
+    }
+}
+```
