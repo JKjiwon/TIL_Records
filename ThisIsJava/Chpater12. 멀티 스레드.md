@@ -19,7 +19,7 @@
 
 - main() 메소드를 실행하면서 시작하고 첫 코드부터 순차적으로 실행
 
-- 필요에 따라 작업 스레드를 만들어서 병렬로 코드를 실행 가능
+- 필요에 따라 작업 스레드를 만들어서 병렬로 코드를 실행
 
 - 프로세스는 모든 스레드가 종료되어야 종료된다.
 
@@ -64,7 +64,7 @@ thread.start();
 
 ### Thread 하위 클래스로부터 생성
 
-- Thread 클래스를 상속한 후 run 메소드를 overriding 해서 스레드가 실행할 코드를 작성
+Thread 클래스를 상속한 후 run 메소드를 Overriding 해서 스레드가 실행할 코드를 작성
 
 ```java
 public class WorkerThread extends Thread {
@@ -85,7 +85,7 @@ Thread thread = new Thread() {
 
 ### Thread의 이름
 
-- 스레드의 이름은 디버깅 할때 유용
+스레드의 이름은 디버깅 할때 유용
 
 ```java
 // 스레드 객체의 참조를 가지고 있을 때.
@@ -111,7 +111,7 @@ Thread thread2 = Thread.currentThread(); // 스레드 객체의 참조를 얻을
 
 - 스레드를 어떤 순서에 의해 동시성으로 실행할 것인가를 결정하는 것
 
-**우선순위(Priority) 방식**
+#### 우선순위(Priority) 방식
 
 - 우선순위가 높은 스레드가 실행 상태(CPU 자원)를 더 많이 가지도록 하는 스케쥴링
 
@@ -126,7 +126,7 @@ thread.setPriority(Thread.NORM_PRIORITY); // 5
 thread.setPriority(Thread.MIN_PRIORITY); // 1
 ```
 
-**순환 할당(Round-Robin) 방식**
+#### 순환 할당(Round-Robin) 방식
 
 - 시간 할당량(Time Slice)을 정해서 하나의 스레드를 정해진 시간만큼 실행하고 다시 다른 스레드를 실행하는 방식
 
@@ -138,11 +138,11 @@ thread.setPriority(Thread.MIN_PRIORITY); // 1
 
 ### 공유 객체를 사용할 때의 주의할 점
 
-- 두 스레드가 동일한 메모리 필드에 접근하고자 할 때
+두 스레드가 동일한 메모리 필드에 접근하고자 할 때
 
-    ![공유객체](images/shared_object.png)
+![공유객체](images/shared_object.png)
 
-    user1의 결과가 100이 아니라 50이 나온다.
+user1의 결과가 100이 아니라 50이 나온다.
 
 
 ### 동기화 메소드 및 동기화 블록
@@ -155,7 +155,7 @@ thread.setPriority(Thread.MIN_PRIORITY); // 1
 
 - 임계 영역을 지정하기 위해 동기화(synchronized) 메소드와 동기화 블럭을 제공
 
-- 스레드가 객체 내부의 동기화 메소드 또는 블록에 들어가면 `즉시 잠금을 걸어` 다른 스레드가 임계 영역의 코드를 실행하지 못하도록 한다.
+- 스레드가 객체 내부의 동기화 메소드 또는 블록에 들어가면 `즉시 객체에 잠금을 걸어` 다른 스레드가 임계 영역 코드를 실행하지 못하도록 한다.
 
 #### 동기화 메소드
 
@@ -177,7 +177,7 @@ public synchronized void method() {
 public void method() {
     // 여러 스레드가 실행 가능 영역
     synchronized(공유객체) {
-        // 임계영역 = 단 하나의 스레드만 실행 가능
+    // 임계영역 : 단 하나의 스레드만 실행 가능
     }
     // 여러 스레드가 실행 가능 역역
 }
@@ -186,7 +186,7 @@ public void method() {
 ![동기화](images/synchronized.png)
 
 **주의점**
-- 동기화 블럭과 동기화 메소드가 여러개 있을 경우, 스레드가 이들 중 하나를 실행할 때 다른 스레드는 해당 메소드는 물론 다른 동기화 메소드 및 블록도 샐행 할 수 없다.
+- 동기화 블럭과 동기화 메소드가 여러개 있을 경우, 스레드가 이들 중 하나를 실행할 때 다른 스레드는 해당 메소드는 물론 다른 동기화 메소드 및 블록도 실행 할 수 없다.
 
 <br>
 
