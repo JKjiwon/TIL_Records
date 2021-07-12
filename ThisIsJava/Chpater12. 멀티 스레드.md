@@ -199,7 +199,7 @@ public void method() {
 
     - 이때가 `실행(Running) 상태`
 
-3. 실행 상태의 스레드는 run() 메소드를 모두 실행하기 전에 스레드 스케쥴링에 의해 다시 실행 대기 상태가 된다.
+3. 실행 상태의 스레드는 run() 메소드를 모두 실행하기 전에 스레드 스케쥴링에 의해 다시 `실행 대기(Blocked) 상태`가 된다.
 
     - `실행 대기 상태와 실행 상태를 번갈아가면서` 자신의 run() 메소드를 조금씩 실행
 
@@ -220,30 +220,30 @@ public void method() {
     <tbody>
         <tr>
             <td>객체 생성</td>
-            <td>NEW</td>
+            <td>New</td>
             <td>스레드 객체가 생성, 아직 start() 메소드가 호출되지 않은 상태</td>
         </tr>
         <tr>
             <td>실행 대기</td>
-            <td>RUNNABLE</td>
+            <td>Runnable</td>
             <td>실행 상태로 언제든지 갈 수 있는 상태</td>
         </tr>
         <tr>
             <td rowspan=3>일시 정지</td>
-            <td>WAITING</td>
+            <td>Waiting</td>
             <td>다른 스레드가 통지할 때까지 기다리는 상태</td>
         </tr>
         <tr>
-            <td>TIMED_WAITING</td>
+            <td>Timed_waiting</td>
             <td>주어진 시간동안 기다리는 상태</td>
         </tr>
         <tr>
-            <td>BLOCKED</td>
+            <td>Blocked</td>
             <td>사용하고자 하는 객체의 락이 풀릴 때까지 기다리는 상태</td>
         </tr>
         <tr>
             <td>종료</td>
-            <td>TERMINATED</td>
+            <td>Terminated</td>
             <td>실행을 마친 상태</td>
         </tr>
     </tbody>
