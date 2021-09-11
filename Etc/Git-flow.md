@@ -7,3 +7,8 @@
 - feature : 단위 기능을 개발하는 브랜치로 기능 개발이 완료되면 develop 브랜치에 Merge
 - release : 배포를 위해 master 브랜치로 보내기 전에 먼저 QA(품질검사)를 하기위한 브랜치
 - hotfix : master 브랜치로 배포를 했는데 버그가 생겼을 떄 긴급 수정하는 브랜치
+
+## 실제 flow
+
+![git-flow](/Etc/images/git-flow.png)
+`Vincent Driessen의 블로그 참조`
